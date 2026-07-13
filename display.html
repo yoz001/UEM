@@ -35,20 +35,20 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      gap: 20px;
+      gap: 15px;
     }
 
     h1 {
-      font-size: 4rem;
+      font-size: 3.8rem;
       font-weight: 900;
       color: #000;
       margin: 0;
       line-height: 1;
-      letter-spacing: -2px;
+      letter-spacing: -1px;
     }
 
     .user-text {
-      font-size: 2.2rem;
+      font-size: 2rem;
       font-weight: 600;
       color: #000;
       margin: 0;
@@ -57,34 +57,35 @@
     }
 
     .timestamp {
-      font-size: 1.8rem;
-      color: #7cb342;
+      font-size: 1.6rem;
       font-weight: 600;
-      margin: 10px 0;
+      margin: 15px 0;
       line-height: 1.4;
+      transition: color 0.3s ease;
     }
 
     .camera-icon {
-      width: 160px;
-      height: 160px;
-      margin: 30px 0;
+      width: 150px;
+      height: 150px;
+      margin: 25px 0;
+      flex-shrink: 0;
     }
 
     .version {
-      font-size: 0.85rem;
-      color: #666;
-      margin-top: 20px;
+      font-size: 0.8rem;
+      color: #888;
+      margin-top: 15px;
     }
 
     .back-button {
-      margin-top: 30px;
-      padding: 12px 20px;
+      margin-top: 25px;
+      padding: 10px 18px;
       background-color: #6b8e23;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       cursor: pointer;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
       transition: background-color 0.3s;
     }
@@ -103,12 +104,12 @@
       }
 
       .timestamp {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
       }
 
       .camera-icon {
-        width: 140px;
-        height: 140px;
+        width: 130px;
+        height: 130px;
       }
     }
   </style>
@@ -116,8 +117,8 @@
 <body>
   <div class="screen-content">
     <h1>Thinking</h1>
-    <div class="user-text" id="userMessage">Her Chyn Yeow</div>
-    <div class="timestamp">
+    <div class="user-text" id="userMessage">Amazing Moment</div>
+    <div class="timestamp" id="timestamp">
       <span id="dateDisplay">2026/07/10</span><br>
       <span id="timeDisplay">16:28:47</span>
     </div>
@@ -155,7 +156,11 @@
       document.getElementById('userMessage').textContent = userMessage;
     }
 
-    // Update date and time
+    // Color array for timestamp
+    const colors = ['#7cb342', '#d4af37', '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7'];
+    let colorIndex = 0;
+
+    // Update date and time with changing color
     function updateDateTime() {
       const now = new Date();
       const year = now.getFullYear();
@@ -167,6 +172,11 @@
       
       document.getElementById('dateDisplay').textContent = `${year}/${month}/${day}`;
       document.getElementById('timeDisplay').textContent = `${hours}:${minutes}:${seconds}`;
+      
+      // Change color every second
+      const timestampElement = document.getElementById('timestamp');
+      timestampElement.style.color = colors[colorIndex];
+      colorIndex = (colorIndex + 1) % colors.length;
     }
 
     updateDateTime();
